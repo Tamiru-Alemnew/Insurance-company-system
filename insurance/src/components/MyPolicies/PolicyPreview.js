@@ -13,8 +13,8 @@ function PolicyPreview({type, id, premium, date, status}) {
         case "Motor Vehicle":
             source = '../car.jpg'
             break;
-        case "Property":
-            source = '../house.jpg'
+        case "House":
+            source = '../House.jpg'
             break;
         case "Life Insurance":
             source = '../life_insurance.jpg'
