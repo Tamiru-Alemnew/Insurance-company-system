@@ -10,8 +10,22 @@ function PolicyList() {
                         {policyType: "Life Insurance", policyId: "1234-5678", annualPremium: "10,000 ETB", nextPaymentDate: "02/01/2024", status: 1}]
 
     let policies = []
+
+    async function readPolicies() {
+        let policiesAPI = "api/getPolicy";
+        try {
+            let response = await fetch(policiesAPI, {
+                method: 'GET',
+            })
+            let data = await response.json()
+            console.log(data);
+            return data
+        } catch(error) { return console.error("Error fetching policies:", error); };
+    }
+    readPolicies();
+    
     for (let i = 0; i < policiesFromDB.length; i++) {
-        policies.push(<PolicyPreview type={policiesFromDB[i].policyType} id={policiesFromDB[i].policyId} premium={policiesFromDB[i].annualPremium} date={policiesFromDB[i].nextPaymentDate} status={policiesFromDB[i].status}/>)
+        policies.push(<PolicyPreview type={policiesFromDB[i].policyType} id={"policy-"+policiesFromDB[i].policyId} premium={policiesFromDB[i].annualPremium} date={policiesFromDB[i].nextPaymentDate} status={policiesFromDB[i].status}/>)
     }
     return (
         <div>
