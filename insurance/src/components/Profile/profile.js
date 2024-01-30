@@ -1,51 +1,50 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Field from "./Field";
 import Notification from "./notification";
-
+import { toast } from "react-toastify";
 function Profile() {
-  const [user, setUser] = useState({
-    name: localStorage.getItem("name"),
-    id: localStorage.getItem("UserId"),
-    gender: "Male",
-    dob: "Nov 26, 2003",
-    occupation: "Student",
-    email: "abenezerseifu@gmail.com",
-    address: "Gulele, Addis Ababa, Ethiopia",
-    phone: "0912145212",
-    preferred: "email",
-    password: 123,
-  });
+const [user, setUser] = useState();
+ const [isPasswordChanger, setPasswordChanger] = useState(false);
+ const [isPasswordCorrect, setPasswordCorrect] = useState(false);
+ const [incorrectPassword, setIncorrectPassword] = useState(false);
+ const [OldPassword, setOldPassword] = useState("");
+const [isEditMode, setIsEditMode] = useState(false);
 
-  const basicInfo = [
-    <Field caption={"Full Name"} value={user.name} />,
-    <Field caption={"User ID"} value={user.id} />,
-    <Field caption={"Gender"} value={user.gender} />,
-    <Field caption={"Date of Birth"} value={user.dob} />,
-  ];
-
-  async function readUser() {
+  async function getUser() {
     let userAPI = "/api/getUser/";
     try {
       let response = await fetch(userAPI, {
-        method: "GET",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ UserId: localStorage.getItem("UserId") }),
       });
       let data = await response.json();
-      console.log(data);
-      setUser(data);
+
+      setUser(data["0"]);
       return data;
     } catch (error) {
-      return console.error("Error reading profile:", error);
+      return toast.error("Error reading profile:", error);
     }
   }
-  readUser();
 
-  function updateUser(e) {
+console.log(user)
+
+  const basicInfo = [
+    <Field caption={"Full Name"} value={user?.Fullname} />,
+    <Field caption={"User ID"} value={user?.UserId} />,
+    <Field caption={"Gender"} value={user?.Gender} />,
+    <Field caption={"Date of Birth"} value={"Feb 26 ,2003 "} />,
+  ];
+
+ async function updateUser(e) {
     e.preventDefault();
     if (isEditMode) {
       return;
     }
-    let updateAPI = "api/updateUser/" + localStorage.getItem("UserId");
+    let updateAPI = "api/updateUser/";
     fetch(updateAPI, {
       method: "PATCH",
       headers: {
@@ -57,67 +56,44 @@ function Profile() {
         return response.json();
       })
       .then(function (data) {
-        alert("You have successfully updated your profile!");
-        console.log(data);
+        toast.success("You have successfully updated your profile!");;
       })
       .catch(function (error) {
-        return console.error("Error updating profile!", error);
+        return toast.error("Error updating profile!", error);
       });
   }
 
   function checkPassword() {
-    let checkPasswordAPI = "api/checkPassword" + localStorage.getItem("UserId");
-    fetch(checkPasswordAPI, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password: oldPassword,
-      }),
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        if (data == false) {
-          setIncorrectPassword(true);
-        } else {
-          setPasswordCorrect(true);
-          setIncorrectPassword(false);
-        }
-      })
-      .catch(function (error) {
-        return console.error("Error checking password!", error);
-      });
+    return user?.password === OldPassword
   }
 
   function updatePassword() {
-    let updateAPI = "api/updateUser/" + localStorage.getItem("UserId");
+    let updateAPI = "/api/editUser/";
     fetch(updateAPI, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        UserId: localStorage.getItem(""),
-        password: user.password,
+        UserId: localStorage.getItem("UserId"),
+        password: user?.password,
       }),
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        alert("You have successfully updated your profile!");
-        console.log(data);
+        toast.success("You have successfully updated your profile!");
       })
       .catch(function (error) {
-        return console.error("Error updating profile!", error);
+        return toast.error("Error updating profile!", error);
       });
   }
 
-  const [isEditMode, setIsEditMode] = useState(false);
+  useEffect(() => {
+    getUser();
+  }, []);
+
 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
@@ -130,12 +106,8 @@ function Profile() {
     }));
   };
 
-  const [isPasswordChanger, setPasswordChanger] = useState(false);
-  const [isPasswordCorrect, setPasswordCorrect] = useState(false);
-  const [incorrectPassword, setIncorrectPassword] = useState(false);
-  const [oldPassword, setOldPassword] = useState("");
+ 
 
-  
   return (
     <div className=" w-11/12 mx-auto my-10 grid grid-cols-12">
       <div className="col-span-8 bg-gray-200 rounded-lg p-10">
@@ -154,9 +126,9 @@ function Profile() {
               <input
                 className="w-3/5"
                 type="text"
-                value={user.address}
+                value={user?.Address}
                 readOnly={!isEditMode}
-                onChange={(e) => handleInputChange(e.target.value, "address")}
+                onChange={(e) => handleInputChange(e.target.value, "Address")}
               />
             </label>
             <label className="flex gap-3 justify-between">
@@ -164,9 +136,9 @@ function Profile() {
               <input
                 className="w-3/5"
                 type="number"
-                value={user.phone}
+                value={user?.Phone}
                 readOnly={!isEditMode}
-                onChange={(e) => handleInputChange(e.target.value, "phone")}
+                onChange={(e) => handleInputChange(e.target.value, "Phone")}
               />
             </label>
             <label className="flex gap-3 justify-between">
@@ -174,15 +146,15 @@ function Profile() {
               <input
                 className="w-3/5"
                 type="email"
-                value={user.email}
+                value={user?.Email}
                 readOnly={!isEditMode}
-                onChange={(e) => handleInputChange(e.target.value, "email")}
+                onChange={(e) => handleInputChange(e.target.value, "Email")}
               />
             </label>
             <label className="flex gap-3 justify-between">
               <span className="font-semibold">Preferred contact method:</span>
               <select
-                value={user.preferred}
+                value={"E-Mail"}
                 onChange={(e) => handleInputChange(e.target.value, "preferred")}
                 disabled={!isEditMode}
                 className="w-3/5"
