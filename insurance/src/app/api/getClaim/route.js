@@ -1,10 +1,16 @@
-import { NextResponse } from "next/server";
-import connectDB from "../../../utils/dbConnect";
+// plicy of a specific user with id
 import Claim from "../../../models/claims";
+import connectDB from "../../../utils/dbConnect";
 
-export async function GET(req) {
+export async function POST(req, res) {
   await connectDB();
-//   const { userId } = req.query;
-  const payments = await Claim.find({ userId: "6598fb57804b9630c26887bc" });
-  return new NextResponse().json(payments);
+  let passedValue = await new Response(req.body).text();
+  let bodyreq = JSON.parse(passedValue);
+  const { UserId } = bodyreq;
+  const claims = await Claim.find({ UserId });
+
+  if (!claims) {
+    return new Response("Policy not found", { status: 404 });
+  }
+  return Response.json(claims);
 }

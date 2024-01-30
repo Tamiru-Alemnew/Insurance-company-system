@@ -10,7 +10,12 @@ export async function POST(req, res) {
   const { Fullname, Email, Phone, Address, Gender, Occupation } = bodyreq;
   console.log(Fullname);
   console.log(user)
+  
+  //user id and default password
+
   const person = new user({
+    UserId: "123456789",
+    password: "123456789",
     Fullname,
     Email,
     Phone,
@@ -20,6 +25,5 @@ export async function POST(req, res) {
     
   });
   await person.save();
-  console.log(person);
   return NextResponse.json(person);
 }

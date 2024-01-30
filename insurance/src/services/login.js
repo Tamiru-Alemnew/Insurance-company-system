@@ -1,3 +1,3 @@
 import mongoose from "mongoose";
 
-const async function login()
+const async function login(){}

@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/utils/dbConnect.js",
-    "src/app/api/registerUser/route.js"
-  ],
+    "src/app/api/addUser/route.js"
+, "src/app/api/login/route.js", "src/app/api/addPolicy/route.js"  ],
   "exclude": ["node_modules"]
 }

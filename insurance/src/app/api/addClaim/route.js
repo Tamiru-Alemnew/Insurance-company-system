@@ -7,7 +7,7 @@ export async function POST(req , res){
    let passedValue = await new Response(req.body).text();
    let bodyreq = JSON.parse(passedValue);
    const Claim = new claims({
-     userId: bodyreq.userId,
+      UserId: bodyreq.UserId,
         ClaimType: bodyreq.ClaimType,
         ClaimStatus: bodyreq.ClaimStatus,
         ClaimAmount: bodyreq.ClaimAmount,
@@ -18,7 +18,6 @@ export async function POST(req , res){
         TransactionID: bodyreq.TransactionID,
    });
    await Claim.save();
-   console.log(Claim);
    return NextResponse.json(Claim);
    
    }

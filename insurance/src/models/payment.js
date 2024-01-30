@@ -6,6 +6,7 @@ const Payment = mongoose.Schema({
   PaymentAmount: { type: String, required: true },
   PaymentDate: { type: String, required: true },
   Reason: { type: String, required: true },
+  //pplicy id and based on this fetch payment history 
   TransactionMethod: { type: String, required: true },
   PaymentReason: { type: String, required: true },
 });
