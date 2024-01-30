@@ -9,8 +9,8 @@ export async function POST(req, res) {
   console.log(bodyreq);
   const { Fullname, Email, Phone, Address, Gender, Occupation } = bodyreq;
   console.log(Fullname);
-  console.log(user)
-  
+  console.log(user);
+
   //user id and default password
 
   const person = new user({
@@ -22,7 +22,6 @@ export async function POST(req, res) {
     Address,
     Gender,
     Occupation,
-    
   });
   await person.save();
   return NextResponse.json(person);

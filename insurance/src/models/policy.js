@@ -14,10 +14,9 @@ const PolicySchema = mongoose.Schema({
 let Policy;
 
 if (mongoose.models.Policy) {
-  Policy = mongoose.model('Policy');
+  Policy = mongoose.model("Policy");
 } else {
-  Policy = mongoose.model('Policy', PolicySchema);
+  Policy = mongoose.model("Policy", PolicySchema);
 }
 
 export default Policy;
-

@@ -6,19 +6,17 @@ export async function POST(req) {
   let passedValue = await new Response(req.body).text();
   let bodyreq = JSON.parse(passedValue);
 
-  console.log(bodyreq);
-
   const { UserId, password } = bodyreq;
 
   const user = await User.findOne({ UserId });
 
   if (!user) {
-    return new Response( "User not found",{ status: 404 },);
+    return new Response("User not found", { status: 404 });
   }
   if (user.password !== password) {
-      return new Response( "Incorrect password",{status: 401});
+    return new Response("Invalid Credential ", { status: 401 });
   }
-  const name = user.Fullname;
+  const data = { name: user.Fullname, UserId: user.UserId };
 
-  return Response.json(name);
+  return Response.json(data);
 }

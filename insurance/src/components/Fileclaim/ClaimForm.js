@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import "./claim.css"
+import {toast} from "react-toastify"
 
 function ClaimForm() {
     const [policy , setPolicy] = useState("")
@@ -23,31 +24,33 @@ function ClaimForm() {
 
     function postClaim(e) {
         e.preventDefault()
-        console.log({
-            "userId": localStorage.getItem("userID"),
-            "policyId": policy,
-            "reason": reason,
-            "claimDate": claimDate
-        })
 
-        let postClaimAPI = "api/addClaim"
+        const data = {
+          UserId: localStorage.getItem("UserId"),
+          TransactionID: policy,
+          ClaimType: reason,
+          ClaimDate: claimDate,
+          PolicyHolder: localStorage.getItem("name"),
+        };
+
+        let postClaimAPI = "/api/addClaim"
         fetch(postClaimAPI, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                "userId": localStorage.getItem("userID"),
-                "policyId": policy,
-                "reason": reason,
-                "claimDate": claimDate
-            })
+            body: JSON.stringify(data)
         })
         .then(function (response) { return response.json(); })
         .then(function (data) {
-            console.log(data)
+            toast.success("Claim Submitted Successfully")
         })
+        .catch(function (err) {
+            toast.error("error in submitting claim, please try again");
+        });
     }
+
+
   return (
      <main>
         <div className="claim-form-container mt-6">
