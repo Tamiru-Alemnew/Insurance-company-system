@@ -24,6 +24,84 @@ function Profile() {
         <Field caption={"Date of Birth"} value={user.dob}/>,
     ]
 
+    async function readUser() {
+        let userAPI = "api/getUser/" + localStorage.getItem("userId");
+        try {
+            let response = await fetch(userAPI, {
+                method: 'GET',
+            })
+            let data = await response.json()
+            console.log(data);
+            setUser(data);
+            return data
+        } catch(error) { return console.error("Error reading profile:", error); };
+    }
+    readUser();
+
+    function updateUser(e) {
+        e.preventDefault();
+        if ((isEditMode)) {
+            return 
+        }
+        let updateAPI = "api/updateUser/" + localStorage.getItem("userId");
+        fetch(updateAPI, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                alert("You have successfully updated your profile!")
+                console.log(data)
+        })
+            .catch(function (error) { return console.error("Error updating profile!", error); });
+    
+    }
+
+    function checkPassword() {
+        let checkPasswordAPI = "api/checkPassword" + localStorage.getItem("userId");
+        fetch(checkPasswordAPI, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "password": oldPassword
+            })
+        })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+            console.log(data)
+            if (data == false) {
+                setIncorrectPassword(true);
+            } else {
+                setPasswordCorrect(true);
+                setIncorrectPassword(false);
+            }
+        })   
+        .catch(function (error) { return console.error("Error checking password!", error); });
+    }
+
+    function updatePassword() {
+        let updateAPI = "api/updateUser/" + localStorage.getItem("userId");
+        fetch(updateAPI, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({"userId": localStorage.getItem(""), "password": user.password}),
+        })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                alert("You have successfully updated your profile!")
+                console.log(data)
+        })
+            .catch(function (error) { return console.error("Error updating profile!", error); });
+    }
+
+
     const [isEditMode, setIsEditMode] = useState(false);
 
     const toggleEditMode = () => {
@@ -53,6 +131,7 @@ function Profile() {
             </div>
             <div className='my-10 flex flex-col w-4/5 items-between gap-5 mx-auto'>
                 <h2 className='font-bold text-xl mb-5'>Contact Information</h2>
+                <form onSubmit={updateUser} className='flex flex-col w-full items-between gap-5 mx-auto'>
                 <label className='flex gap-3 justify-between'>
                     <span className='font-semibold'>Address:</span>
                     <input className='w-3/5'
@@ -92,9 +171,10 @@ function Profile() {
                 <div className='gap-4 flex mt-5'>
                 <button className="rounded-xl px-5 py-2 font-bold bg-blue-500 w-max text-white" onClick={toggleEditMode}>{isEditMode ? 'Save Changes' : 'Edit'}</button>
                 {isEditMode && 
-                    <button className="rounded-xl px-5 py-2 font-bold bg-red-500 w-max text-white" type="submit" onClick={toggleEditMode}>Cancel</button>
+                    <button className="rounded-xl px-5 py-2 font-bold bg-red-500 w-max text-white" onClick={toggleEditMode}>Cancel</button>
                 }
                 </div>
+                </form>
             </div>
             
             <div className='w-4/5 mx-auto'>
@@ -108,14 +188,7 @@ function Profile() {
                             </label>
                             {incorrectPassword && <p className='text-sm text-red-500'>Incorrect Password</p>}
                             <button className="rounded-xl px-5 py-2 font-bold bg-blue-500 w-max text-white" 
-                                onClick={() => {
-                                    if (oldPassword != user.password) {
-                                        setIncorrectPassword(true);
-                                    } else {
-                                        setPasswordCorrect(true);
-                                        setIncorrectPassword(false);
-                                    }
-                                }}
+                                onClick={checkPassword}
                             >Next</button>
                         </div>
                     : 

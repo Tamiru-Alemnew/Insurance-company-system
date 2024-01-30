@@ -5,6 +5,7 @@ function PolicyPreview({type, id, premium, date, status}) {
     const router = useRouter();
     const changeNavigation = () => {
         router.push('policy/policydetail');
+        localStorage.setItem("policyDetail", id)
     };
 
     let source = "../car.jpg"
@@ -21,7 +22,7 @@ function PolicyPreview({type, id, premium, date, status}) {
     }
 
     return (
-        <div className="flex justify-between bg-gray-300 p-8 rounded-2xl">
+        <div id={id} className="flex justify-between bg-gray-300 p-8 rounded-2xl">
             <div className="flex flex-col justify-between items-start flex-grow">
                 <div className="border-l-4 border-blue-500 px-3 py-2 w-11/12 bg-blue-100">
                     <p><span className="inline font-bold">Policy Type:</span> {type}</p>

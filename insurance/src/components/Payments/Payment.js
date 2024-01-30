@@ -1,16 +1,66 @@
 'use client'
 import {React, useState} from 'react'
 import "./payment.css"
-import {useRouter } from 'next/navigation'
 
 
 function Payment() {
-  const router = useRouter();
   const [payMethod, setPayMethod] = useState(true)
+
+  const [policy , setPolicy] = useState("")
+  const [amount , setAmount] = useState("")
+  const [method , setMethod] = useState("")
+  const [reason , setReason] = useState("")
+
+  function handleChange(change, val){
+      switch (val) {
+          case "policy":
+              setPolicy(change)
+              break
+          case "amount":
+              setAmount(change)
+              break
+          case "method":
+              setMethod(change)
+              break
+          case "reason":
+              setReason(change)
+              break
+      }
+  }
+
+  function postPayment(e) {
+    e.preventDefault()
+    console.log({
+        "userId": localStorage.getItem("userID"),
+        "policyId": policy,
+        "method": method,
+        "amount": amount
+    })
+
+    let postClaimAPI = "api/addClaim"
+    fetch(postClaimAPI, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "userId": localStorage.getItem("userId"),
+            "policyId": policy,
+            "reason": reason,
+        })
+    })
+    .then(function (response) { return response.json(); })
+    .then(function (data) {
+        console.log(data)
+    })
+    .catch(function (error) { return console.error("Error posting claim!", error); });
+
+  }
+
   return (
     <main>
       <h1 className='font-bold text-xl my-5 text-center'>Choose your insurance type and complete the payment securely.</h1>
-      <form>
+      <form onSubmit={postPayment}>
           <label for="name" className='font-bold'>Full Name</label><br />
           <input className="box" type="text" name="fullName" id="fullName" placeholder="Enter Full Name" required/><br />
           <label for="email" className='font-bold'>Email</label><br />
@@ -18,9 +68,11 @@ function Payment() {
           <label for="phone" className='font-bold'>Enter Phone Number</label><br />
           <input className="box" type="tel" name="phone" id="phone" placeholder="Enter Phone Number" required/><br/>
           <label for="policyNumber" className='font-bold'>Policy ID</label><br />
-          <input className="box" type="text" name="policyNumber" id="policyNumber" placeholder="Enter Policy Number" required/><br />
+          <input onChange={(e) => handleChange(e.target.value,"policy")} value={policy} className="box" type="text" name="policyNumber" id="policyNumber" placeholder="Enter Policy Number" required/><br />
           <label for="amount" className='font-bold'>Payment Amount</label><br />
-          <input className="box" type="number" name="amount" id="amount" placeholder="Enter Amount" required/><br />
+          <input onChange={(e) => handleChange(e.target.value,"amount")} value={amount} className="box" type="number" name="amount" id="amount" placeholder="Enter Amount" required/><br />
+          <label for="reason" className='font-bold'>Payment Reason</label><br />
+          <input onChange={(e) => handleChange(e.target.value,"reason")} value={reason} className="box" type="text" name="reason" id="reason" placeholder="Reason" required/><br />
           {/* <h2 className='font-bold'>Select Insurance Type</h2>
           <div className="insurance-buttons mt-2">
             <label><input className="insurance-button" type="radio" name='insurance-type' value="Health"/>Health</label>
@@ -37,19 +89,19 @@ function Payment() {
 
           {payMethod && <div className='border-t-4 border-blue-500'>
             <div className="payment-method">
-                  <input type="radio" name="payment-method" id="method-1" required />
+                  <input onChange={(e) => handleChange(e.target.value,"method")} value="CBE" type="radio" name="payment-method" id="method-1" required />
                   <label for="method-1" className="payment-method-item">
                     <img src="../../commercial_bank.jpg" alt="CBE logo" />
                   </label>
-                  <input type="radio" name="payment-method" id="method-2" required />
+                  <input onChange={(e) => handleChange(e.target.value,"method")} value="BOA" type="radio" name="payment-method" id="method-2" required />
                   <label for="method-2" className="payment-method-item">
                     <img src="../../bank_of_abyssina.jpg" alt="BOA logo" />
                   </label>
-                  <input type="radio" name="payment-method" id="method-3" required />
+                  <input onChange={(e) => handleChange(e.target.value,"method")} value="Buna bank" type="radio" name="payment-method" id="method-3" required />
                   <label for="method-3" className="payment-method-item">
                     <img src="../../buna_bank.jpg" alt="Buna bank logo" />
                   </label>
-                  <input type="radio" name="payment-method" id="method-4" required />
+                  <input onChange={(e) => handleChange(e.target.value,"method")} value="telebirr" type="radio" name="payment-method" id="method-4" required />
                   <label for="method-4" className="payment-method-item">
                     <img src="../../tele_birr.jpg" alt="telebirr logo" />
                   </label>
@@ -109,7 +161,7 @@ function Payment() {
           <div className='flex gap-x-4 gap-y-2 flex-wrap my-4'>
             {/* <h2 className='w-full font-bold'>Select Payment Method</h2> */}
             <button className="bg-blue-500 font-semibold text-white py-2 px-4 hover:bg-blue-600 rounded-md" onClick={()=>{setPayMethod(true)}}>Pay Now</button>
-            <button href="" className="bg-blue-500 font-semibold text-white py-2 px-4 hover:bg-blue-600 rounded-md" onClick={()=>{setPayMethod(false)}}>Payment by Transfer</button>
+            <button href="" className="bg-blue-500 font-semibold text-white py-2 px-4 hover:bg-blue-600 rounded-md" onClick={()=>{setPayMethod(false); setMethod("transfer")}}>Payment by Transfer</button>
             <a href='/portal/policy' className="bg-red-500 font-semibold text-white py-2 px-4 hover:bg-red-600 rounded-md cursor-pointer">Cancel</a>
           </div>
       </form>

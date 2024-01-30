@@ -6,6 +6,26 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 function PolicyDetail() {
+  async function readPolicies() {
+    let policiesAPI = "api/getPolicy";
+    try {
+        let response = await fetch(policiesAPI, {
+            method: 'GET',
+        })
+        let data = await response.json()
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          if (data.id = localStorage.getItem("policyDetail")) {
+            values = data
+          }          
+        }
+        return data
+    } catch(error) { return console.error("Error fetching policies:", error); };
+  }
+  readPolicies();
+
+  let sourcePDF = "";
+
   let captions = ["Policy Type","Policy Purchase Date","Annual Premium","Next Payment Date","Plate No.", "Chassis No.","Engine No.","Make of Vehicle","Type of Body","Horse Power of Cylinder Capacity CC","Year of Manufactured","Carrying Capacity including driver","Year Purchased","Purchased Price","Present Estimate Value"]
   let values = ["Motor Vehicle","6/6/2021","10,000 ETB","2/2/2024","4-HR-1230","SV30-0169266","PJ12345U123456P","Toyota","SUV","301","2020","6","2021","3,000,000 ETB","2,000,000 ETB"]
   let properties = []
@@ -13,19 +33,55 @@ function PolicyDetail() {
     properties.push(<Row caption={captions[i]} value={values[i]} r={i}/>)    
   }
 
+  if (values[0] == "Motor Vehicle") {
+    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
+  } else if (values[0] == "property") {
+    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
+  } else {
+    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
+  }
+
   const router = useRouter();
   const changeNavigation = () => {
       router.push('/portal/claim');
   };
 
-  const payments = [{date: "2/1/2024", id:"1234", amount: "3000 ETB", reason: "Annual Premium Payment", transactionMethod:"via telebirr"},
+  let payments = [{date: "2/1/2024", id:"1234", amount: "3000 ETB", reason: "Annual Premium Payment", transactionMethod:"via telebirr"},
                     {date: "1/12/2023", id:"1331", amount: "3000 ETB", reason: "Annual Premium Payment", transactionMethod:"via CBE Birr"},
                     {date: "23/11/2023", id:"1664", amount: "30000 ETB", reason: "Initial Policy Payment", transactionMethod:"via Branch"}]
+  async function readPayments() {
+    let paymentsAPI = "api/getPayments/"+localStorage.getItem("policyDetail");
+    try {
+        let response = await fetch(paymentsAPI, {
+            method: 'GET',
+        })
+        let data = await response.json()
+        console.log(data);
+        payments = data;
+        return data
+    } catch(error) { return console.error("Error fetching payments:", error); };
+  }
+  readPayments();
 
-  const claims = [{id:"1234", claimDate: "1/1/2024", reason: "Car Accident", amount: "20000 ETB", paymentDate: "2/2/2024", status: "Ongoing", paymentId:"1111"},
+  let claims = [{id:"1234", claimDate: "1/1/2024", reason: "Car Accident", amount: "20000 ETB", paymentDate: "2/2/2024", status: "Ongoing", paymentId:"1111"},
                   {id:"3232", claimDate: "1/1/2024", reason: "Theft", amount: "1500000 ETB", paymentDate: "2/2/2024", status: "Full Payment", paymentId:"2222"},
                   {id:"12121", claimDate: "1/1/2024", reason: "Death", amount: "100000 ETB", paymentDate: "2/2/2024", status: "Full payment", paymentId:"2222"},
                   {id:"32445", claimDate: "1/1/2024", reason: "Car Accident", amount: "20000 ETB", paymentDate: "2/2/2024", status: "Full Repaired", paymentId:"1111"}]
+
+  async function readClaims() {
+    let claimsAPI = "api/getClaims/"+localStorage.getItem("policyDetail");
+    try {
+        let response = await fetch(claimsAPI, {
+            method: 'GET',
+        })
+        let data = await response.json()
+        console.log(data);
+        claims = data;
+        return data
+    } catch(error) { return console.error("Error fetching claims:", error); };
+  }
+  readClaims();
+
   let paymentsRow = []
   for (let i = 0; i < payments.length; i++) {
     paymentsRow.push(<PaymentHistory date={payments[i].date} id={payments[i].id} amount={payments[i].amount} reason={payments[i].reason} transactionMethod={payments[i].transactionMethod} r={i}/>)
@@ -63,7 +119,7 @@ function PolicyDetail() {
 
         <div className='my-10'>
             <h2 className='text-center text-2xl font-semibold underline'>Policy Contract and Details</h2>
-            <iframe className='mx-auto my-8 w-3/5' src="https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview" width="800" height="700"></iframe>
+            <iframe className='mx-auto my-8 w-3/5' src={sourcePDF} width="800" height="700"></iframe>
         </div>
 
         <div className='w-4/5 mx-auto my-10'>
