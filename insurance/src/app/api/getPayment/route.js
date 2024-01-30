@@ -9,7 +9,7 @@ export async function POST(req, res) {
   const { UserId } = bodyreq;
   const payments = await Payment.find({ UserId });
 
-  if (!paymentss) {
+  if (!payments) {
     return new Response("Payment not found", { status: 404 });
   }
   return Response.json(payments);
