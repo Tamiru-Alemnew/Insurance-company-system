@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 
-function PolicyPreview({type, id, premium, date, status}) {
+function PolicyPreview({type, id, premium, date, status, detail}) {
     const router = useRouter();
     const changeNavigation = () => {
         router.push('policy/policydetail');
-        localStorage.setItem("policyDetail", id)
+        localStorage.setItem("policyDetail", JSON.stringify(detail))
     };
 
     let source = "../car.jpg"
