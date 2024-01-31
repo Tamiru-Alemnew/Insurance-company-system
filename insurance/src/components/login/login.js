@@ -23,10 +23,10 @@ function LoginForm() {
       toast.error("Invalid Credential");
       return;
     }
+    toast.success("Login Successful");
     const user = await response.json();
     localStorage.setItem("name", user.name);
     localStorage.setItem("UserId", UserId);
-    toast.success("Login Successful");
     router.push("/portal/policy");
   }
 
