@@ -67,10 +67,11 @@ function PolicyList() {
     policies.push(
       <PolicyPreview
         type={myPolicy[i].InsuredProperty}
-        id={"policy-" + myPolicy[i].policyId}
+        id={myPolicy[i].policyId}
         premium={myPolicy[i].Premium}
         date={myPolicy[i].NextPaymentDate}
         status={i}
+        detail={myPolicy[i]}
       />
     );
   }

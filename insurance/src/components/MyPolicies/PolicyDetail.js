@@ -6,39 +6,32 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 function PolicyDetail() {
-  async function readPolicies() {
-    let policiesAPI = "api/getPolicy";
-    try {
-        let response = await fetch(policiesAPI, {
-            method: 'GET',
-        })
-        let data = await response.json()
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-          if (data.id = localStorage.getItem("policyDetail")) {
-            values = data
-          }          
-        }
-        return data
-    } catch(error) { return console.error("Error fetching policies:", error); };
-  }
-  readPolicies();
-
-  let sourcePDF = "";
 
   let captions = ["Policy Type","Policy Purchase Date","Annual Premium","Next Payment Date","Plate No.", "Chassis No.","Engine No.","Make of Vehicle","Type of Body","Horse Power of Cylinder Capacity CC","Year of Manufactured","Carrying Capacity including driver","Year Purchased","Purchased Price","Present Estimate Value"]
   let values = ["Motor Vehicle","6/6/2021","10,000 ETB","2/2/2024","4-HR-1230","SV30-0169266","PJ12345U123456P","Toyota","SUV","301","2020","6","2021","3,000,000 ETB","2,000,000 ETB"]
+  let detail = JSON.parse(localStorage.getItem("policyDetail"));
   let properties = []
-  for (let i = 0; i < 4; i++) {
-    properties.push(<Row caption={captions[i]} value={values[i]} r={i}/>)    
-  }
+  properties.push(<Row caption={captions[0]} value={detail.InsuredProperty} r={0}/>)
+  properties.push(<Row caption={captions[1]} value={detail.PolicyStartDate} r={1}/>)
+  properties.push(<Row caption={captions[2]} value={detail.Premium} r={2}/>)
+  properties.push(<Row caption={captions[3]} value={detail.PolicyRenewal} r={3}/>)
 
-  if (values[0] == "Motor Vehicle") {
-    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
-  } else if (values[0] == "property") {
-    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
+  // for (let i = 0; i < 4; i++) {
+  //   properties.push(<Row caption={captions[i]} value={values[i]} r={i}/>)    
+  // }
+
+  let sourcePDF = "";
+  let sourceImg = "";
+
+  if (detail.InsuredProperty == "Car") {
+    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview" 
+    sourceImg = '../../car.jpg'
+  } else if (detail.InsuredProperty == "House") {
+    sourcePDF = "https://drive.google.com/file/d/1Y-9SiTS31f_niqzijY5imWaF8Cblg6E7/preview"
+    sourceImg = '../../House.jpg'
   } else {
-    sourcePDF = "https://drive.google.com/file/d/1_kWY50jpKbs9YFGmHuQKfvbmET6b-pAA/preview"
+    sourcePDF = "https://drive.google.com/file/d/1ywlUHkaKBT9W2DAXiaI9ZN-gO5cShqFO/preview"
+    sourceImg = '../../life_insurance.jpg'
   }
 
   const router = useRouter();
@@ -107,10 +100,10 @@ function PolicyDetail() {
       <main className='p-5'>
         <header className='flex justify-around my-12 items-center w-4/5 mx-auto'>
           <hgroup>
-            <h1 className='font-semibold text-3xl'>Motor Vehicle (Toyota Prado)</h1>
-            <p className='font-semibold'>Policy-ID: 1234-5678</p>
+            <h1 className='font-semibold text-3xl'>{detail.InsuredProperty}</h1>
+            <p className='font-semibold'>Policy-ID: {detail.policyId}</p>
           </hgroup>
-          <img src='../../car.jpg'/>
+          <img src={sourceImg}/>
         </header>
         
         <table className='w-4/5 mx-auto text-lg'>

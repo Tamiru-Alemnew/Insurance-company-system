@@ -36,7 +36,7 @@ function Payment() {
       amount: amount,
     });
 
-    let postClaimAPI = "api/addClaim";
+    let postClaimAPI = "api/addPayment";
     fetch(postClaimAPI, {
       method: "POST",
       headers: {
