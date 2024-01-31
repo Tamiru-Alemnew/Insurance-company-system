@@ -8,6 +8,7 @@ export async function POST(req, res) {
   let bodyreq = JSON.parse(passedValue);
   const Claim = new claims({
     UserId: bodyreq.UserId,
+    PolicyId:bodyreq.PolicyId,
     ClaimType: bodyreq.ClaimType,
     ClaimStatus: "Pending",
     ClaimAmount: "2700",

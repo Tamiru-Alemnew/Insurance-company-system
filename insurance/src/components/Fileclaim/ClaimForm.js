@@ -28,6 +28,7 @@ function ClaimForm() {
         const data = {
           UserId: localStorage.getItem("UserId"),
           TransactionID: policy,
+          PolicyId: policy,
           ClaimType: reason,
           ClaimDate: claimDate,
           PolicyHolder: localStorage.getItem("name"),

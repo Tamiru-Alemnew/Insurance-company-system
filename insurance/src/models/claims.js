@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const Claim = mongoose.Schema({
   UserId: { type: String, required: true },
+  PolicyId: { type: String, required: true },
   ClaimType: { type: String, required: true },
   ClaimStatus: { type: String, required: true },
   ClaimAmount: { type: String, required: true },

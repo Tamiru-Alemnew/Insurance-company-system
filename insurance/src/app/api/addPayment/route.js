@@ -10,6 +10,7 @@ export async function POST(req, res) {
     UserId: bodyreq.UserId,
     PaymentId: bodyreq.PaymentId,
     Payer: bodyreq.Payer,
+    PolicyId:bodyreq.PolicyId,
     PaymentAmount: bodyreq.PaymentAmount,
     PaymentDate: bodyreq.PaymentDate,
     Reason: bodyreq.Reason,
