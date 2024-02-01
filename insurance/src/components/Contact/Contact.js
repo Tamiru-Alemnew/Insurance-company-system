@@ -1,8 +1,25 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import './style.css'
 import './bootstrap.min.css'
+import { toast } from 'react-toastify';
 
 function Contact() {
+    const [email , setEmail] = useState()
+
+    function formchecker(e){
+          e.preventDefault()
+          let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            toast.error("Invalid Email!");
+            console.log("What");
+            e.preventDefault();
+            return;
+          }
+          
+          toast.success("Thank you , Your feed back has been recorded. Our team will address it ASAP")
+
+    }
   return (
     <div>
         {/* <!-- Spinner Start --> */}
@@ -98,7 +115,7 @@ function Contact() {
                     <p className="mb-4">
                     If you encounter any problems or need assistance with getting in touch, please feel free to write us a message. You can provide the details of the issue you're facing, and we'll do our best to help you out.
                     </p>
-                    <form>
+                    <form onSubmit={formchecker}>
                         <div className="row g-3">
                             <div className="col-md-6">
                                 <div className="form-floating">
@@ -107,6 +124,7 @@ function Contact() {
                                         className="form-control"
                                         id="name"
                                         placeholder="Your Name"
+                                        required
                                     />
                                     <label for="name">Your Name</label>
                                 </div>
@@ -117,7 +135,9 @@ function Contact() {
                                 type="email"
                                 className="form-control"
                                 id="email"
+                                onChange={(e)=> setEmail(e.target.value)}
                                 placeholder="Your Email"
+                                required
                                 />
                                 <label for="email">Your Email</label>
                             </div>
@@ -129,6 +149,7 @@ function Contact() {
                                 className="form-control"
                                 id="subject"
                                 placeholder="Subject"
+                                required
                                 />
                                 <label for="subject">Subject</label>
                             </div>
@@ -139,6 +160,7 @@ function Contact() {
                                 className="form-control h-24"
                                 placeholder="Leave a message here"
                                 id="message"
+                                required
                                 ></textarea>
                                 <label for="message">Message</label>
                             </div>
