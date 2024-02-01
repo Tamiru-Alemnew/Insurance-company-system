@@ -77,12 +77,12 @@ function Register() {
             e.preventDefault()
             return
         }
-
-        if (phone.length < 10 || phone[0] != "0" || phone.length > 10) {
-            toast.error("Invalid Phone Number!")   
-            e.preventDefault()
-            return   
-        }
+        const ethiopianPhoneNumberRegex = /^(?:\+251|\b09)\d{8}$/;
+        if (!ethiopianPhoneNumberRegex.test(phone)) {
+        toast.error("invalid phone number format");
+         e.preventDefault();
+        return;
+}
 
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!(emailRegex.test(email))) {
@@ -120,7 +120,7 @@ function Register() {
                     </div>
                     <div className='flex gap-4 justify-end'>
                         <label for="phone" className='font-semibold'>Phone Number :</label>
-                        <input onChange={(e) => handleChange(e.target.value, "phone")} value={phone} type="number" id="phone" required placeholder='eg. 0911772772' className='w-1/2' maxLength={10}/>
+                        <input onChange={(e) => handleChange(e.target.value, "phone")} value={phone} type="text" id="phone" required placeholder='eg. 0911772772' className='w-1/2' maxLength={10}/>
                     </div>
                     <div className='flex gap-4 justify-end'>
                         <label for="occupation" className='font-semibold'>Occupation</label>

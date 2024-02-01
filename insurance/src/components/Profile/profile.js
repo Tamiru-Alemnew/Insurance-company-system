@@ -39,8 +39,7 @@ console.log(user)
     <Field caption={"Date of Birth"} value={"Feb 26 ,2003 "} />,
   ];
 
- async function updateUser(e) {
-    e.preventDefault();
+ async function updateUser() {
     if (isEditMode) {
       return;
     }
@@ -106,7 +105,26 @@ console.log(user)
     }));
   };
 
- 
+ const formchecker = (e)=>{
+      e.preventDefault();
+      console.log(user?.Email)
+      const ethiopianPhoneNumberRegex = /^(?:\+251|\b09)\d{8}$/;
+      if(!ethiopianPhoneNumberRegex.test(user?.Phone)){
+        toast.error("invalid phone number format")
+        return;
+      }
+
+  let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(user?.Email)) {
+    toast.error("Invalid Email Format!");
+    return;
+  }
+  updateUser();
+
+ }
+  
+
 
   return (
     <div className=" w-11/12 mx-auto my-10 grid grid-cols-12">
@@ -118,7 +136,7 @@ console.log(user)
         <div className="my-10 flex flex-col w-4/5 items-between gap-5 mx-auto">
           <h2 className="font-bold text-xl mb-5">Contact Information</h2>
           <form
-            onSubmit={updateUser}
+            onSubmit={formchecker}
             className="flex flex-col w-full items-between gap-5 mx-auto"
           >
             <label className="flex gap-3 justify-between">
@@ -129,16 +147,18 @@ console.log(user)
                 value={user?.Address}
                 readOnly={!isEditMode}
                 onChange={(e) => handleInputChange(e.target.value, "Address")}
+                required
               />
             </label>
             <label className="flex gap-3 justify-between">
               <span className="font-semibold">Phone No:</span>
               <input
                 className="w-3/5"
-                type="number"
+                type="text"
                 value={user?.Phone}
                 readOnly={!isEditMode}
                 onChange={(e) => handleInputChange(e.target.value, "Phone")}
+                
               />
             </label>
             <label className="flex gap-3 justify-between">
