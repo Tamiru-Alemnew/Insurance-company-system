@@ -6,7 +6,7 @@ function Footer() {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
       <div className="flex items-center">
           <img src="../../InsuranceLogo.png" alt="Insurance Logo" className="w-28"/>
-          <p className="font-bold text-xl text-black">ABC Insurance</p>
+          <p className="font-bold text-xl text-black">Gasha Insurance</p>
       </div>
       <div>
         <h2 className='font-bold text-lg mb-4'>Quick Links</h2>
@@ -45,7 +45,7 @@ function Footer() {
         </div>
       </div>
       <div className='w-full mt-9 -mb-3 font-semibold px-9 pr-24 flex justify-between text-sm text-black'>
-        <p>Copyright ©2024 All rights reserved | ABC Insurance </p>
+        <p>Copyright ©2024 All rights reserved | Gasha Insurance </p>
         <ul className='flex gap-5'>
           <li>Privacy & Policy</li>
           <li>Terms & Conditions</li>

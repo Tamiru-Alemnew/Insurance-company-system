@@ -35,7 +35,7 @@ function PaymentInfo() {
                 placeholder="Enter Name"
                 required
               /><br />
-              <label for="Pemail" className='font-bold'>Enter Email</label><br />
+              <label for="Pemail" className='font-bold'>Email</label><br />
               <input
                 className="box"
                 type="text"
@@ -44,7 +44,7 @@ function PaymentInfo() {
                 placeholder="Enter Email"
                 required
               /><br />
-              <label for="phone" className='font-bold'>Enter Phone Number</label><br />
+              <label for="phone" className='font-bold'>Phone Number</label><br />
               <input
                 className="box"
                 type="tel"

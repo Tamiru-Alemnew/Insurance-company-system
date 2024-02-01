@@ -22,6 +22,7 @@ function ClaimForm() {
         }
     }
 
+    let maxDate = new Date().toISOString().split("T")[0];
     function postClaim(e) {
         e.preventDefault()
 
@@ -68,7 +69,7 @@ function ClaimForm() {
                             <input type="email" id="email" required/>
                         </div>
                         <div>
-                            <label for="contactNumber" className='font-semibold'>Contact Number:</label>
+                            <label for="contactNumber" className='font-semibold'>Phone Number:</label>
                             <input type="tel" id="contactNumber" required/>
                         </div>
                         <div>
@@ -77,7 +78,7 @@ function ClaimForm() {
                         </div>
                         <div>
                             <label for="claimDate" className='font-semibold'>Claim Date:</label>
-                            <input onChange={(e) => handleChange(e.target.value,"date")} value={claimDate} type="date" id="claimDate" required/>
+                            <input onChange={(e) => handleChange(e.target.value,"date")} value={claimDate} type="date" id="claimDate" max={maxDate} required/>
                         </div>
                         <div>
                             <label for="claimReason" className='font-semibold'>Claim Reason:</label>

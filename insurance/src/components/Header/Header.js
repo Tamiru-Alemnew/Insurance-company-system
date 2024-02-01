@@ -41,7 +41,7 @@ function Header() {
         <header className="navbar flex justify-between mx-5 px-8 py-3 items-end ">
         <a href='/' className='flex items-end'>
             <img src="../../InsuranceLogo.png" alt="Insurance Logo" className="w-24"/>
-            <h1 className="font-bold text-2xl mb-0">ABC Insurance</h1>
+            <h1 className="font-bold text-4xl mb-0">Gasha Insurance</h1>
         </a>
         {navbar}
         </header>
