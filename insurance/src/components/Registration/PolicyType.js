@@ -6,69 +6,69 @@ function PolicyType() {
       <div className='my-7 grid grid-cols-2 gap-4 mx-auto justify-center text-right'>
           <div className='flex gap-4 justify-end'>
               <label for="plate" className='font-semibold'>Plate Number :</label>
-              <input type="number" id="plate" className='h-max'/>
+              <input type="number" id="plate" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="chasis" className='font-semibold'>Chasis Number :</label>
-              <input type="text" id="chasis" className='h-max'/>
+              <input type="text" id="chasis" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="engine" className='font-semibold'>Engine Number :</label>
-              <input type="text" id="engine" className='h-max'/>
+              <input type="text" id="engine" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="vehicle" className='font-semibold'>Vehicle Type :</label>
-              <input type="text" id="vehicle" className='h-max'/>
+              <input type="text" id="vehicle" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="year" className='font-semibold'>Year of Manufacture :</label>
-              <input type="number" id="year" className='h-max'/>
+              <input type="number" id="year" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="capacity" className='font-semibold'>Carring Capacity :</label>
-              <input type="text" id="capacity" className='h-max'/>
+              <input type="text" id="capacity" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="power" className='font-semibold'> Horse Power :</label>
-              <input type="text" id="power" className='h-max'/>
+              <input type="text" id="power" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="purchased" className='font-semibold'>Year Purchased :</label>
-              <input type="number" id="purchased" className='h-max'/>
+              <input type="number" id="purchased" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="price" className='font-semibold'>Price Paid by Purchaser :</label>
-              <input type="number" id="price" className='h-max'/>
+              <input type="number" id="price" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="Estimate" className='font-semibold'>Propser's Present Estimate Value :</label>
-              <input type="number" id="Estimate" className='h-max'/>
+              <input type="number" id="Estimate" className='h-max' required/>
           </div>
       </div>,
       <div className='my-7 grid grid-cols-2 gap-4 mx-auto justify-center text-right'>
           <div className='flex gap-4 justify-end'>
               <label for="assetType" className='font-semibold'>Asset Type :</label>
-              <input type="text" id="assetType" className='h-max'/>
+              <input type="text" id="assetType" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="assetCity" className='font-semibold'>Asset's City :</label>
-              <input type="text" id="assetCity" className='h-max'/>
+              <input type="text" id="assetCity" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="sub-city" className='font-semibold'>Sub city of The Asset :</label>
-              <input type="text" id="sub-city" className='h-max'/>
+              <input type="text" id="sub-city" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="kebele" className='font-semibold'>Kebele of The Asset :</label>
-              <input type="text" id="kebele" className='h-max'/>
+              <input type="text" id="kebele" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="area" className='font-semibold'>Total Area :</label>
-              <input type="number" id="area" className='h-max'/>
+              <input type="number" id="area" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="value" className='font-semibold'>Proposer's Present Estimate Value :</label>
-              <input type="number" id="value" className='h-max'/>
+              <input type="number" id="value" className='h-max' required/>
           </div>
       </div>,
       <div className='my-7 grid grid-cols-2 gap-4 mx-auto justify-center text-right'>
@@ -78,7 +78,7 @@ function PolicyType() {
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="insured-age" className='font-semibold'>Insured's Age :</label>
-              <input type="text" id="insured-age" required className='w-1/2'/>
+              <input type="number" id="insured-age" required className='w-1/2'/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="insured-occupation" className='font-semibold'>Insured's Occupation :</label>

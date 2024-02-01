@@ -20,7 +20,7 @@ function Contact() {
                     We recognize that the journey starts with you, and we are dedicated to accompanying you.
                     {/* From the outset, we offer comprehensive coverage and exceptional service. */}
                     Our experienced team is committed to guiding you through the insurance of mind.
-                    Trust ABC Insurance to go above and beyond for you.
+                    Trust Gasha Insurance to go above and beyond for you.
                 </p>
             </div>
         </div>

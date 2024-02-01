@@ -128,6 +128,7 @@ function Payment() {
           value={amount}
           className="box"
           type="number"
+          min={0}
           name="amount"
           id="amount"
           placeholder="Enter Amount"
