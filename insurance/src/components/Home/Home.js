@@ -8,7 +8,7 @@ function Home() {
   return (
     <div>
     <main className="container mx-auto">
-        <div className='slogan my-2 mb-12'><div className="text-6xl bg-slate-800 bg-opacity-20 w-full h-full font-extrabold text-blue-500 justify-center flex items-center"><p className='w-3/5 text-center'>Manage your Insurance Effortlessly</p></div></div>
+        <div className='slogan my-2 mb-12'><div className="text-6xl bg-slate-800 bg-opacity-0 w-full h-full font-extrabold text-blue-500 justify-center flex items-center"><p className='w-3/5 text-center'>Manage your Insurance Effortlessly</p></div></div>
         <div id="about" className='h-screen flex flex-col justify-center'>
             <div className='text-center w-4/5 mx-auto border-b-2 border-blue-500 mb-14'>
                 <h2 className='font-bold text-5xl mt-6'>Because Time Matters</h2>
@@ -22,19 +22,19 @@ function Home() {
         <div className="cards flex gap-4 w-4/5 mx-auto flex-wrap">
             <h2 className="text-2xl font-bold my-5 w-full">Our Key Features</h2>
             <div className="card text-white bg-blue-500 px-4 py-4 mx-2 my-2 flex-1 rounded-lg flex flex-col gap-2 text-center">
-                <h3 className="text-lg font-bold underline">Policy Portal</h3>
+                <h3 className="text-lg font-bold">Policy Portal</h3>
                 <p>Access all your policy details instantly, from coverages to expiration dates, in one centralized location.</p>
             </div>
             <div className="card text-white bg-blue-500 px-4 py-4 mx-2 my-2 flex-1 rounded-lg flex flex-col gap-2 text-center">
-                <h3 className="text-lg font-bold underline">Effortless Payments</h3>
+                <h3 className="text-lg font-bold">Effortless Payments</h3>
                 <p>Pay your premiums with ease</p>
             </div>
             <div className="card text-white bg-blue-500 px-4 py-4 mx-2 my-2 flex-1 rounded-lg flex flex-col gap-2 text-center">
-                <h3 className="text-lg font-bold underline">Automated Reminders</h3>
+                <h3 className="text-lg font-bold">Automated Reminders</h3>
                 <p>Never miss a deadline again. Receive timely notifications for upcoming payments, policy renewals, and important updates</p>
             </div>
             <div className="card text-white bg-blue-500 px-4 py-4 mx-2 my-2 flex-1 rounded-lg flex flex-col gap-2 text-center">
-                <h3 className="text-lg font-bold underline">Appointment Scheduling</h3>
+                <h3 className="text-lg font-bold">Appointment Scheduling</h3>
                 <p>Schedule appointments with insurance professionals directly through the system, at your convenience.</p>
             </div>
         </div>

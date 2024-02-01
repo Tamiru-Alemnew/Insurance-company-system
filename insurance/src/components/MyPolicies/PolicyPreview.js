@@ -29,7 +29,7 @@ function PolicyPreview({type, id, premium, date, status, detail}) {
                     <p><span className="inline font-bold">Policy ID:</span> {id}</p>
                     <div className="flex justify-between">
                         <p><span className="inline font-bold">Annual Premium:</span> {premium}</p>
-                        <p className={`${status >= 2? "text-red-500 font-bold":""}`}><span className="inline font-bold">Next Payment Date:</span> {date}</p>
+                        <p className={`${status >= 1? "text-red-500 font-bold":""}`}><span className="inline font-bold text-black">Next Payment Date:</span> {date}</p>
                     </div>
                 </div>
                 <button className='bg-blue-500 rounded-xl p-2 font-bold text-white' onClick={changeNavigation}>
