@@ -5,7 +5,7 @@ function PolicyPreview({type, id, premium, date, status, detail}) {
     const router = useRouter();
     const changeNavigation = () => {
         router.push('policy/policydetail');
-        localStorage.setItem("policyDetail", JSON.stringify(detail))
+        localStorage.setItem("policyDetail", JSON.stringify(id))
     };
 
     let source = "../car.jpg"
