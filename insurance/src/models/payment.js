@@ -3,6 +3,7 @@ const Payment = mongoose.Schema({
   UserId: { type: String, required: true },
   PaymentId: { type: String, required: true },
   Payer: { type: String, required: true },
+  PolicyId: { type: String, required: true },
   PaymentAmount: { type: String, required: true },
   PaymentDate: { type: String, required: true },
   Reason: { type: String, required: true },

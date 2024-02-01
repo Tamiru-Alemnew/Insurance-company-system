@@ -58,6 +58,7 @@ function PolicyList() {
   }
 
   console.log(myPolicy.length);
+  
   useEffect(() => {
     readPolicies();
   }, []);

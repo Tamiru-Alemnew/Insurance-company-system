@@ -26,7 +26,7 @@ function PolicyType() {
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="capacity" className='font-semibold'>Carring Capacity :</label>
-              <input type="text" id="capacity" className='h-max' required/>
+              <input type="number" id="capacity" className='h-max' required/>
           </div>
           <div className='flex gap-4 justify-end'>
               <label for="power" className='font-semibold'> Horse Power :</label>

@@ -9,7 +9,9 @@ function PolicyDetail() {
 
   let captions = ["Policy Type","Policy Purchase Date","Annual Premium","Present Estimate Value","Next Payment Date","Plate No.", "Chassis No.","Engine No.","Make of Vehicle","Type of Body","Horse Power of Cylinder Capacity CC","Year of Manufactured","Carrying Capacity including driver","Year Purchased","Purchased Price","Present Estimate Value"]
   let values = ["Motor Vehicle","6/6/2021","10,000 ETB","2/2/2024","4-HR-1230","SV30-0169266","PJ12345U123456P","Toyota","SUV","301","2020","6","2021","3,000,000 ETB","2,000,000 ETB"]
+  
   let detail = JSON.parse(localStorage.getItem("policyDetail"));
+ 
   let properties = []
   properties.push(<Row caption={captions[0]} value={detail.InsuredProperty} r={0}/>)
   properties.push(<Row caption={captions[1]} value={detail.PolicyStartDate} r={1}/>)
