@@ -6,6 +6,7 @@ import {toast} from "react-toastify"
 function ClaimForm() {
     const [policy , setPolicy] = useState("")
     const [reason , setReason] = useState("")
+    const [name, setName] = useState("");
     const [email , setEmail] = useState("")
     const [claimDate , setClaimDate] = useState(new Date().toISOString().slice(0, 10))
 
@@ -61,9 +62,12 @@ function ClaimForm() {
           console.log("What");
           e.preventDefault();
           return;
-        }else{
-            postClaim(e)
         }
+        //name validation
+
+        
+            postClaim(e)
+        
 
     }
 
