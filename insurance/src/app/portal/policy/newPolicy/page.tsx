@@ -2,7 +2,9 @@ import React from 'react'
 import PolicyType from '../../../../components/Registration/PolicyType'
 function page() {
   return (
-    <PolicyType/>
+    <form>
+      <PolicyType/>
+    </form>
   )
 }
 

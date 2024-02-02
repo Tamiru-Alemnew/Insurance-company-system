@@ -61,10 +61,10 @@ function LoginForm() {
             Login
           </button>
         </form>
-        <p className="text-sm">
+        {/* <p className="text-sm">
           Forgot <span className="text-blue-500">User ID</span> or{" "}
           <span className="text-blue-500">Password</span>?
-        </p>
+        </p> */}
       </div>
       <div className="flex flex-col gap-3 md:w-2/5">
         <h1 className="font-bold text-xl">First Time User</h1>
