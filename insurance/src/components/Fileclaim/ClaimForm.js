@@ -64,7 +64,11 @@ function ClaimForm() {
           return;
         }
         //name validation
-
+          if (!/^[a-zA-Z\s]*$/.test(name)) {
+            toast.error("Invalid Name!");
+            e.preventDefault();
+            return;
+          }
         
             postClaim(e)
         
@@ -86,7 +90,7 @@ function ClaimForm() {
                 <label for="insuredName" className="font-semibold">
                   Full Name:
                 </label>
-                <input type="text" id="insuredName" required />
+                <input value={name} onChange={(e)=>setName(e.target.value)} type="text" id="insuredName" required />
               </div>
               <div>
                 <label for="email" className="font-semibold">

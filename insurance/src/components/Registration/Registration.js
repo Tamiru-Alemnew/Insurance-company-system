@@ -72,10 +72,10 @@ function Register() {
 
     function submitChecker(e) {
         //name
-        if (/\d/.test(name) || name.length < 2 || name.length > 50) {
-            toast.error("Invalid Name!")
-            e.preventDefault()
-            return
+        if (!/^[a-zA-Z\s]*$/.test(name)) {
+            toast.error("Invalid Name!");
+            e.preventDefault();
+          return ;
         }
         const ethiopianPhoneNumberRegex = /^(?:\+251|\b09)\d{8}$/;
         if (!ethiopianPhoneNumberRegex.test(phone)) {
@@ -91,6 +91,7 @@ function Register() {
             e.preventDefault()
             return   
         }
+        
 
         postUser(); 
         toast.success("Registered Successfully");

@@ -10,6 +10,7 @@ const [user, setUser] = useState();
  const [incorrectPassword, setIncorrectPassword] = useState(false);
  const [OldPassword, setOldPassword] = useState("");
 const [isEditMode, setIsEditMode] = useState(false);
+const [preferred, setPreferred] = useState("E-Mail");
 
   async function getUser() {
     let userAPI = "/api/getUser/";
@@ -174,7 +175,7 @@ console.log(user)
             <label className="flex gap-3 justify-between">
               <span className="font-semibold">Preferred contact method:</span>
               <select
-                value={"E-Mail"}
+                value={user?.preferred}
                 onChange={(e) => handleInputChange(e.target.value, "preferred")}
                 disabled={!isEditMode}
                 className="w-3/5"
